@@ -119,28 +119,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .register-container input[type="text"],
-        .register-container input[type="email"],
-        .register-container input[type="password"],
-        .register-container select,
-        .register-container textarea {
-            background: #EEEEEE;
-            color: #183041;
-            border: none;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            font-size: 1rem;
-            outline: none;
-            transition: box-shadow 0.3s;
-        }
+.register-container input[type="email"],
+.register-container input[type="password"],
+.register-container select,
+.register-container textarea {
+    background: #EEEEEE;
+    color: #183041;
+    border: none;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    width: 100%; /* Ensures all input fields take up full width */
+    height: 45px; /* Fixed height for uniform size */
+    transition: box-shadow 0.3s;
+}
 
-        .register-container input[type="text"]:focus,
-        .register-container input[type="email"]:focus,
-        .register-container input[type="password"]:focus,
-        .register-container select:focus,
-        .register-container textarea:focus {
-            box-shadow: 0px 0px 10px rgba(4, 208, 126, 0.8);
-        }
+.register-container input[type="text"]:focus,
+.register-container input[type="email"]:focus,
+.register-container input[type="password"]:focus,
+.register-container select:focus,
+.register-container textarea:focus {
+    box-shadow: 0px 0px 10px rgba(4, 208, 126, 0.8);
+}
+/* Textarea specific styling to maintain consistency */
+.register-container textarea {
+    height: 120px; /* Fixed height for textarea */
+    resize: vertical; /* Allows resizing only vertically */
+}
+
+/* Optional: To make sure consultant and organization fields also match the main form */
+#consultantFields input,
+#organizationFields input,
+#consultantFields textarea,
+#organizationFields input {
+    width: 100%;
+    height: 45px; /* Ensure all fields in these sections have consistent height */
+}
 
         .register-container button {
             background: #04d07e;
