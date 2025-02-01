@@ -1,0 +1,31 @@
+<?php
+session_start();
+include('db.php');
+
+// Check if the consultant is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$consultant_id = $_SESSION['user_id'];
+
+// Fetch reviews for this consultant
+$reviews_query = "SELECT r.rating, r.comment, r.client_id, r.created_at, u.name AS client_name
+                  FROM reviews r
+                  JOIN users u ON r.client_id = u.id
+                  WHERE r.booking_id IN (SELECT id FROM bookings WHERE consultant_id = $1)";
+$reviews_result = pg_query_params($con, $reviews_query, array($consultant_id));
+
+// Display reviews
+if (pg_num_rows($reviews_result) > 0) {
+    while ($review = pg_fetch_assoc($reviews_result)) {
+        echo "Rating: " . $review['rating'] . "<br>";
+        echo "Comment: " . $review['comment'] . "<br>";
+        echo "Client: " . $review['client_name'] . "<br>";
+        echo "Date: " . $review['created_at'] . "<br><hr>";
+    }
+} else {
+    echo "No reviews yet.";
+}
+?>

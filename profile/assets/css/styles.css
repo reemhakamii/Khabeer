@@ -1,0 +1,270 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+h1, h2, h3 {
+    color: #183041;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+/* Profile Card */
+.profile-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.profile-header h2 {
+    font-size: 24px;
+    color: #183041;
+}
+
+.profile-header p {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* Profile Details */
+.profile-details {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.profile-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #183041;
+}
+
+.profile-details p {
+    font-size: 16px;
+    color: #495057;
+}
+
+.edit-btn {
+    display: inline-block;
+    background-color: #035a66;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #028494;
+}
+
+/* Settings */
+.settings {
+    margin-top: 30px;
+}
+
+.settings h3 {
+    font-size: 20px;
+    color: #183041;
+}
+
+.settings a,
+.settings button {
+    display: block;
+    background-color: #04d07e;
+    color: #fff;
+    padding: 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.settings a:hover,
+.settings button:hover {
+    background-color: #02b36d;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Form Styling */
+form {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form label {
+    font-size: 16px;
+    color: #183041;
+    margin-bottom: 8px;
+    display: block;
+}
+
+form input[type="text"],
+form input[type="file"],
+form input[type="password"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #495057;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="file"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+    border-color: #04d07e;
+    outline: none;
+}
+
+/* Buttons */
+button[type="submit"] {
+    background-color: #035a66;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #028494;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #181818;
+    color: #f0f0f0;
+}
+
+body.dark-mode .container {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .profile-card {
+    background-color: #333;
+    box-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .profile-header h2,
+body.dark-mode .profile-details h3,
+body.dark-mode .settings h3 {
+    color: #fff;
+}
+
+body.dark-mode .profile-header p,
+body.dark-mode .profile-details p {
+    color: #ccc;
+}
+
+body.dark-mode .settings a,
+body.dark-mode .settings button,
+body.dark-mode button[type="submit"] {
+    background-color: #04d07e;
+    color: #fff;
+}
+
+body.dark-mode .settings a:hover,
+body.dark-mode .settings button:hover,
+body.dark-mode button[type="submit"]:hover {
+    background-color: #02b36d;
+}
+
+body.dark-mode form input[type="text"],
+body.dark-mode form input[type="file"],
+body.dark-mode form input[type="password"],
+body.dark-mode form textarea {
+    background-color: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+body.dark-mode form input[type="text"]:focus,
+body.dark-mode form input[type="file"]:focus,
+body.dark-mode form input[type="password"]:focus,
+body.dark-mode form textarea:focus {
+    border-color: #04d07e;
+}
+
+/* Icons for Dark/Light Mode */
+.moon-icon {
+    display: inline;
+}
+
+.sun-icon {
+    display: none;
+}
+
+body.dark-mode .moon-icon {
+    display: none;
+}
+
+body.dark-mode .sun-icon {
+    display: inline;
+}
