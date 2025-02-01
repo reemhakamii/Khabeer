@@ -8,11 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $booking_date = $_POST['booking_date'] ?? null;
     $client_id = $_SESSION['user_id'] ?? null;
 
-    // Debugging - Check if the form data is received properly
-    echo "Consultant ID: $consultant_id<br>";
-    echo "Booking Date: $booking_date<br>";
-    echo "Client ID: $client_id<br>";
-
     // Validate form input
     if (empty($consultant_id) || empty($booking_date) || empty($client_id)) {
         $error_message = "Error: All fields are required.";
@@ -24,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check if the booking was successful
         if ($result) {
-            // Redirect to booking confirmation page
-            header('Location: booking-confirmation.php'); 
+            // Redirect to payment page with the necessary booking details
+            header("Location: payment.php?consultant_id=$consultant_id&client_id=$client_id&booking_date=$booking_date");
             exit();  // Ensure no further code is executed
         } else {
             // Error handling if database insertion fails
@@ -45,159 +40,159 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Book a Consultant</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-    /* General Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    body {
-        background: linear-gradient(135deg, #1d3c52, #4f9a8a);
-        color: #EEEEEE;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
+        body {
+            background: linear-gradient(135deg, #1d3c52, #4f9a8a);
+            color: #EEEEEE;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-    .booking-container {
-        background: rgba(24, 48, 65, 0.9);
-        border-radius: 15px;
-        padding: 3rem;
-        width: 100%;
-        max-width: 600px;
-        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-
-    h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        color: #04d07e;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    label {
-        font-size: 1.2rem;
-        color: #d6fcba;
-        text-align: left;
-    }
-
-    input, select {
-        padding: 0.75rem;
-        font-size: 1rem;
-        border: 2px solid #4f9a8a;
-        border-radius: 8px;
-        background: #183041;
-        color: #EEEEEE;
-        transition: border-color 0.3s;
-    }
-
-    input:focus, select:focus {
-        border-color: #04d07e;
-        outline: none;
-    }
-
-    button {
-        padding: 1rem;
-        background: #04d07e;
-        color: #183041;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    button:hover {
-        background: #035a66;
-    }
-
-    /* Error Message */
-    .error-message {
-        color: #ff4d4d;
-        font-size: 1rem;
-        margin-top: 1rem;
-    }
-
-    /* Loading Spinner */
-    .loading {
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #04d07e;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        animation: spin 1s linear infinite;
-        margin: 2rem auto;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 600px) {
         .booking-container {
-            padding: 2rem;
+            background: rgba(24, 48, 65, 0.9);
+            border-radius: 15px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #04d07e;
         }
 
-        label, button {
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #d6fcba;
+            text-align: left;
+        }
+
+        input, select {
+            padding: 0.75rem;
             font-size: 1rem;
+            border: 2px solid #4f9a8a;
+            border-radius: 8px;
+            background: #183041;
+            color: #EEEEEE;
+            transition: border-color 0.3s;
         }
-    }
 
-    /* Stunning Date-Time Picker Styling */
-    input[type="datetime-local"] {
-        background-color: #183041; /* Dark background */
-        color: #EEEEEE; /* Light text */
-        border: 2px solid #4f9a8a; /* Subtle border */
-        padding: 12px;
-        font-size: 1rem;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        width: 100%; /* Full width */
-    }
+        input:focus, select:focus {
+            border-color: #04d07e;
+            outline: none;
+        }
 
-    input[type="datetime-local"]:focus {
-        outline: none;
-        border-color: #04d07e; /* Highlight border on focus */
-    }
+        button {
+            padding: 1rem;
+            background: #04d07e;
+            color: #183041;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-        background-color: #4f9a8a; /* Customize the calendar icon */
-        border-radius: 50%;
-        padding: 4px;
-    }
+        button:hover {
+            background: #035a66;
+        }
 
-    /* Customize the calendar dropdown */
-    input[type="datetime-local"]::-webkit-datetime-edit {
-        color: #EEEEEE; /* Text color */
-        background-color: #183041; /* Background for date input */
-    }
+        /* Error Message */
+        .error-message {
+            color: #ff4d4d;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
 
-    /* Placeholder styling */
-    input[type="datetime-local"]::placeholder {
-        color: #AAAAAA;
-    }
-</style>
+        /* Loading Spinner */
+        .loading {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #04d07e;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .booking-container {
+                padding: 2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            label, button {
+                font-size: 1rem;
+            }
+        }
+
+        /* Stunning Date-Time Picker Styling */
+        input[type="datetime-local"] {
+            background-color: #183041; /* Dark background */
+            color: #EEEEEE; /* Light text */
+            border: 2px solid #4f9a8a; /* Subtle border */
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%; /* Full width */
+        }
+
+        input[type="datetime-local"]:focus {
+            outline: none;
+            border-color: #04d07e; /* Highlight border on focus */
+        }
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            background-color: #4f9a8a; /* Customize the calendar icon */
+            border-radius: 50%;
+            padding: 4px;
+        }
+
+        /* Customize the calendar dropdown */
+        input[type="datetime-local"]::-webkit-datetime-edit {
+            color: #EEEEEE; /* Text color */
+            background-color: #183041; /* Background for date input */
+        }
+
+        /* Placeholder styling */
+        input[type="datetime-local"]::placeholder {
+            color: #AAAAAA;
+        }
+    </style>
 </head>
 <body>
     <div class="booking-container">

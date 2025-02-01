@@ -12,8 +12,9 @@ if (!$consultant_id || !$booking_date || !$client_id) {
     exit();
 }
 
-// Fetch consultant details
-$query = "SELECT name, specialization FROM users WHERE id = $1";
+// Fetch consultant details from the database
+$query = "SELECT u.name, u.specialization FROM users u 
+          JOIN consultants c ON c.user_id = u.id WHERE c.id = $1";
 $result = pg_query_params($con, $query, [$consultant_id]);
 $consultant = pg_fetch_assoc($result);
 

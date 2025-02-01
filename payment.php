@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session to access session variables
+session_start();
 include('db.php'); // Database connection
 
 // Check if user is logged in
@@ -8,34 +8,21 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Get the booking ID from the URL
-$booking_id = $_GET['booking_id'] ?? null;
+// Retrieve booking details from the URL
+$consultant_id = $_GET['consultant_id'] ?? null;
+$client_id = $_GET['client_id'] ?? null;
+$booking_date = $_GET['booking_date'] ?? null;
 
-if (!$booking_id) {
-    // Handle error if booking ID is not provided
-    echo "Error: Booking ID is missing.";
-    exit();
-}
+// Just set a fixed amount for the payment or fetch it if necessary
+$amount = 1000;  // Example amount (can be adjusted based on your system)
 
-// Get the amount for the booking based on the booking ID
-$query = "SELECT amount FROM bookings WHERE id = $1";
-$result = pg_query_params($con, $query, [$booking_id]);
-
-if ($result && pg_num_rows($result) > 0) {
-    $row = pg_fetch_assoc($result);
-    $amount = $row['amount'];
-} else {
-    echo "Error: Booking not found.";
-    exit();
-}
-
-// Sanitize and validate the amount (assuming it's in SAR)
-if (!is_numeric($amount) || $amount <= 0) {
-    echo "Error: Invalid amount.";
+if (!$consultant_id || !$client_id || !$booking_date) {
+    echo "Error: Missing booking details.";
     exit();
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +33,7 @@ if (!is_numeric($amount) || $amount <= 0) {
 </head>
 <body>
     <h2>Complete Payment for Your Booking</h2>
-    <form action="payment.php?booking_id=<?php echo htmlspecialchars($booking_id); ?>" method="POST">
+    <form action="payment.php?consultant_id=<?php echo htmlspecialchars($consultant_id); ?>&client_id=<?php echo htmlspecialchars($client_id); ?>&booking_date=<?php echo htmlspecialchars($booking_date); ?>" method="POST">
         <script src="https://checkout.stripe.com/checkout.js" 
             class="stripe-button"
             data-key="pk_test_your_public_key"
