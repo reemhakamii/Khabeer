@@ -84,7 +84,7 @@ $result_past_consultations = pg_query_params($con, $query_past_consultations, [$
         <aside class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="home.php"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="profile/index.php"><i class="fas fa-user"></i> Profile</a></li> 
                 <li><a href="#"><i class="fas fa-calendar-alt"></i> Consultations</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
